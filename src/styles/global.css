@@ -1,0 +1,317 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-surface text-neutral-400;
+  }
+
+  ::selection {
+    background: rgba(255, 107, 0, 0.3);
+    color: #fff;
+  }
+
+  /* Subtle grain overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.025;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+@layer utilities {
+
+  /* Text stroke / outline for hero */
+  .text-outline {
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.7);
+    paint-order: stroke fill;
+  }
+
+  @media (min-width: 768px) {
+    .text-outline {
+      -webkit-text-stroke: 3px rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  /* === SCROLL ANIMATIONS === */
+
+  /* Fade in up (default) */
+  .fade-in {
+    animation: fadeInUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Fade in from left */
+  .fade-in-left {
+    animation: fadeInLeft 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-40px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Fade in from right */
+  .fade-in-right {
+    animation: fadeInRight 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(40px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Scale up entrance */
+  .fade-in-scale {
+    animation: fadeInScale 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.92);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Staggered children animation */
+  .fade-in-stagger>[data-animate] {
+    opacity: 0;
+  }
+
+  .fade-in-stagger.is-visible>[data-animate]:nth-child(1) {
+    animation: fadeInUp 0.6s 0.05s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .fade-in-stagger.is-visible>[data-animate]:nth-child(2) {
+    animation: fadeInUp 0.6s 0.12s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .fade-in-stagger.is-visible>[data-animate]:nth-child(3) {
+    animation: fadeInUp 0.6s 0.19s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .fade-in-stagger.is-visible>[data-animate]:nth-child(4) {
+    animation: fadeInUp 0.6s 0.26s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .fade-in-stagger.is-visible>[data-animate]:nth-child(5) {
+    animation: fadeInUp 0.6s 0.33s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .fade-in-stagger.is-visible>[data-animate]:nth-child(6) {
+    animation: fadeInUp 0.6s 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .fade-in-stagger.is-visible>[data-animate]:nth-child(7) {
+    animation: fadeInUp 0.6s 0.47s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .fade-in-stagger.is-visible>[data-animate]:nth-child(8) {
+    animation: fadeInUp 0.6s 0.54s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .fade-in-stagger.is-visible>[data-animate]:nth-child(9) {
+    animation: fadeInUp 0.6s 0.61s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .fade-in-stagger.is-visible>[data-animate]:nth-child(10) {
+    animation: fadeInUp 0.6s 0.68s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  /* === NAV === */
+  .nav-scrolled {
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  /* Nav dropdown animation */
+  .animate-dropdown {
+    animation: dropdownIn 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes dropdownIn {
+    from {
+      opacity: 0;
+      transform: translateY(-8px) scale(0.96);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  /* === EXPANDABLE CONTENT === */
+  .exp-details {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .exp-details.is-open {
+    grid-template-rows: 1fr;
+  }
+
+  .exp-details>div {
+    overflow: hidden;
+  }
+
+  /* === MARQUEE === */
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes marquee-reverse {
+    0% {
+      transform: translateX(-50%);
+    }
+
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 25s linear infinite;
+  }
+
+  .animate-marquee-reverse {
+    animation: marquee-reverse 25s linear infinite;
+  }
+
+  .animate-marquee:hover,
+  .animate-marquee-reverse:hover {
+    animation-play-state: paused;
+  }
+
+  .animate-marquee-slow {
+    animation: marquee 40s linear infinite;
+  }
+
+  /* === DECORATIVE ANIMATIONS === */
+  @keyframes glowPulse {
+
+    0%,
+    100% {
+      opacity: 0.4;
+    }
+
+    50% {
+      opacity: 0.8;
+    }
+  }
+
+  .animate-glow {
+    animation: glowPulse 3s ease-in-out infinite;
+  }
+
+  /* Float animation for decorative elements */
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  /* Dash animation for SVG paths */
+  @keyframes dashDraw {
+    from {
+      stroke-dashoffset: 600;
+    }
+
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .animate-dash {
+    animation: dashDraw 2s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  /* Subtle horizontal line grow */
+  @keyframes lineGrow {
+    from {
+      transform: scaleX(0);
+    }
+
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  .animate-line-grow {
+    animation: lineGrow 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+    transform-origin: left;
+  }
+
+  /* Section separator line animation */
+  .section-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 107, 0, 0.3), transparent);
+  }
+
+  /* Right-origin line grow */
+  .section-line[style*="transform-origin: right"] {
+    transform-origin: right !important;
+  }
+}

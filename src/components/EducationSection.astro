@@ -1,0 +1,73 @@
+---
+import { useTranslations, type Lang } from '../i18n/utils';
+import { getTimeline } from '../i18n/content/experience';
+import SectionHeading from './SectionHeading.astro';
+import TimelineItem from './TimelineItem.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const timeline = getTimeline(lang);
+
+const certifications = [
+  { issuer: 'NVIDIA', title: 'Fundamentals of Deep Learning', year: '2025' },
+  { issuer: 'NVIDIA', title: 'LLM Evaluation & Customization', year: '2025' },
+  { issuer: lang === 'en' ? 'French' : 'Francais', title: 'DALF C1', year: '' },
+  { issuer: lang === 'en' ? 'English' : 'Anglais', title: 'TOEIC 900', year: '' },
+];
+---
+
+<section id="education" class="py-24 md:py-32">
+  <div class="mx-auto max-w-5xl px-6">
+    <div data-animate>
+      <SectionHeading
+        title={t('section.education')}
+        subtitle={t('section.education.subtitle')}
+        number="05"
+      />
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+      <!-- Timeline -->
+      <div data-animate>
+        <h3 class="text-xs font-bold uppercase tracking-widest text-accent mb-6">
+          {lang === 'en' ? 'Academic Path' : 'Parcours'}
+        </h3>
+        {
+          timeline.map((entry, i) => (
+            <TimelineItem entry={entry} isLast={i === timeline.length - 1} />
+          ))
+        }
+      </div>
+
+      <!-- Certifications -->
+      <div data-animate>
+        <h3 class="text-xs font-bold uppercase tracking-widest text-accent mb-6">
+          {lang === 'en' ? 'Certifications' : 'Certifications'}
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {
+            certifications.map((cert) => (
+              <div class="group rounded-2xl bg-surface-raised border border-border p-5 hover:border-accent/20 transition-all">
+                <div class="flex items-start justify-between mb-2.5">
+                  <p class="text-xs font-bold uppercase tracking-widest text-stone-600">
+                    {cert.issuer}
+                  </p>
+                  {cert.year && (
+                    <span class="text-xs font-mono text-stone-700">{cert.year}</span>
+                  )}
+                </div>
+                <h4 class="text-sm font-semibold text-stone-200 group-hover:text-stone-100 transition-colors">
+                  {cert.title}
+                </h4>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

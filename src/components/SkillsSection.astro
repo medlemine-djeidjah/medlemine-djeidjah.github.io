@@ -1,0 +1,197 @@
+---
+import { useTranslations, type Lang } from '../i18n/utils';
+import SectionHeading from './SectionHeading.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// Skill categories with SVG icon colors
+const categories = [
+  {
+    title: 'LANGUAGES',
+    skills: [
+      { name: 'Python', color: '#3776AB' },
+      { name: 'TypeScript', color: '#3178C6' },
+      { name: 'JavaScript', color: '#F7DF1E' },
+      { name: 'SQL', color: '#e38c00' },
+      { name: 'C/C++', color: '#00599C' },
+    ],
+  },
+  {
+    title: 'FRAMEWORKS',
+    skills: [
+      { name: 'LangChain', color: '#1C3C3C' },
+      { name: 'PyTorch', color: '#EE4C2C' },
+      { name: 'TensorFlow', color: '#FF6F00' },
+      { name: 'Next.js', color: '#ffffff' },
+      { name: 'Flask', color: '#ffffff' },
+      { name: 'React', color: '#61DAFB' },
+    ],
+  },
+  {
+    title: 'STATE & DATA',
+    skills: [
+      { name: 'ChromaDB', color: '#FF6B00' },
+      { name: 'FAISS', color: '#0082FC' },
+      { name: 'PostgreSQL', color: '#4169E1' },
+      { name: 'MongoDB', color: '#47A248' },
+      { name: 'Supabase', color: '#3ECF8E' },
+      { name: 'Redis', color: '#DC382D' },
+    ],
+  },
+  {
+    title: 'AI & TOOLS',
+    skills: [
+      { name: 'OpenAI', color: '#10A37F' },
+      { name: 'HuggingFace', color: '#FFD21E' },
+      { name: 'Streamlit', color: '#FF4B4B' },
+      { name: 'OpenCV', color: '#5C3EE8' },
+      { name: 'Pandas', color: '#150458' },
+      { name: 'NumPy', color: '#013243' },
+    ],
+  },
+  {
+    title: 'TOOLS & DEVOPS',
+    skills: [
+      { name: 'Git', color: '#F05032' },
+      { name: 'Docker', color: '#2496ED' },
+      { name: 'Linux', color: '#FCC624' },
+      { name: 'CI/CD', color: '#FF6B00' },
+      { name: 'REST APIs', color: '#FF8A33' },
+      { name: 'MCP', color: '#9333ea' },
+    ],
+  },
+];
+
+const githubCommits = [
+  {
+    icon: '◉',
+    message: 'RAG Chatbot — Full pipeline deployment with ChromaDB...',
+    repo: 'rag-chatbot',
+    hash: 'a3f82c1',
+    date: 'Feb 11',
+  },
+  {
+    icon: '◉',
+    message: 'Liveness Detection — CNN model optimization...',
+    repo: 'liveness-detection',
+    hash: '7e2d4b9',
+    date: 'Feb 10',
+  },
+  {
+    icon: '◉',
+    message: 'Hospital SaaS — RBAC and audit logging system...',
+    repo: 'hospital-saas',
+    hash: 'c5a1f03',
+    date: 'Feb 09',
+  },
+];
+---
+
+<section id="skills" class="py-28 md:py-36">
+  <div class="mx-auto max-w-6xl px-6">
+    <div data-animate>
+      <SectionHeading
+        label={lang === 'en' ? 'TECHNOLOGIES' : 'TECHNOLOGIES'}
+        title="STACK & CODE"
+      />
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+      <!-- Left: Skill categories with icon badges -->
+      <div class="space-y-8 fade-in-stagger">
+        {categories.map((cat) => (
+          <div data-animate>
+            <h3 class="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-4 font-display">
+              {cat.title}
+            </h3>
+            <div class="flex flex-wrap gap-3">
+              {cat.skills.map((skill) => (
+                <div class="inline-flex items-center gap-2 px-3 py-2 bg-surface-raised border border-border hover:border-accent/30 transition-all cursor-default group">
+                  <!-- Color dot icon -->
+                  <span class="w-4 h-4 rounded-sm flex-shrink-0" style={`background-color: ${skill.color}`}></span>
+                  <span class="text-xs font-mono uppercase tracking-wider text-neutral-400 group-hover:text-white transition-colors">
+                    {skill.name}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Right: GitHub Live Feed -->
+      <div class="relative" data-animate-right>
+        <!-- LIVE heading -->
+        <h3 class="font-display text-3xl font-extrabold text-white uppercase mb-6">
+          LIVE<span class="text-accent">.</span>
+        </h3>
+
+        <!-- GitHub feed card -->
+        <div class="bg-surface-raised border border-border overflow-hidden">
+          <!-- Card header -->
+          <div class="flex items-center justify-between px-5 py-4 border-b border-border">
+            <div class="flex items-center gap-3">
+              <!-- Orange square accent -->
+              <div class="w-4 h-4 bg-accent flex-shrink-0"></div>
+              <div>
+                <span class="text-[10px] font-mono uppercase tracking-[0.15em] text-neutral-600 block">LIVE FEED</span>
+                <span class="font-display text-base font-bold text-white">GITHUB</span>
+              </div>
+            </div>
+            <span class="text-[10px] font-mono uppercase tracking-[0.15em] text-accent border border-accent/30 px-2 py-1">● LIVE</span>
+          </div>
+
+          <!-- Commit items -->
+          <div class="divide-y divide-border">
+            {githubCommits.map((commit) => (
+              <div class="px-5 py-4 hover:bg-surface-overlay/50 transition-colors">
+                <div class="flex items-start justify-between gap-4">
+                  <div class="flex items-start gap-3 min-w-0">
+                    <span class="text-accent text-sm mt-0.5 flex-shrink-0">◉</span>
+                    <div class="min-w-0">
+                      <p class="text-sm text-neutral-300 truncate">{commit.message}</p>
+                      <div class="flex items-center gap-2 mt-1">
+                        <span class="text-xs text-accent font-mono">{commit.repo}</span>
+                        <span class="text-xs text-neutral-700 font-mono">{commit.hash}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="text-xs text-neutral-600 font-mono flex-shrink-0 mt-0.5">{commit.date}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <!-- View profile link -->
+          <div class="px-5 py-4 border-t border-border">
+            <a
+              href="https://github.com/medlemine-djeidjah"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm font-mono uppercase tracking-[0.15em] text-neutral-500 hover:text-white transition-colors"
+            >
+              VIEW PROFILE ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- Footer stats -->
+        <div class="flex items-center justify-between mt-4 px-1">
+          <div>
+            <span class="text-[10px] font-mono uppercase tracking-[0.15em] text-neutral-700 block">SOURCE</span>
+            <span class="text-xs font-mono text-neutral-500">GitHub API</span>
+          </div>
+          <div class="text-right">
+            <span class="text-[10px] font-mono uppercase tracking-[0.15em] text-neutral-700 block">REFRESH</span>
+            <span class="text-xs font-mono text-neutral-500">5 min cache</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

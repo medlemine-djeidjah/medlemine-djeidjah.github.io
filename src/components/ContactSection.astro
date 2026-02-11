@@ -1,0 +1,40 @@
+---
+import { useTranslations, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section id="contact" class="mt-28 md:mt-36">
+  <!-- Full-width orange CTA block -->
+  <div class="bg-accent py-16 md:py-24 px-6" data-animate>
+    <div class="mx-auto max-w-4xl text-center">
+      <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold text-black uppercase tracking-tight leading-tight">
+        {lang === 'en' ? "LET'S BUILD" : "CONSTRUISONS"}
+        <br />
+        {lang === 'en' ? 'SOMETHING GREAT' : 'QUELQUE CHOSE DE GRAND'}
+      </h2>
+
+      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href="mailto:djmed3844@gmail.com"
+          class="inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-bold uppercase tracking-[0.15em] text-white bg-black hover:bg-surface-raised border-2 border-black transition-all"
+        >
+          GET IN TOUCH
+        </a>
+        <a
+          href="https://github.com/medlemine-djeidjah"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-bold uppercase tracking-[0.15em] text-black bg-transparent hover:bg-black/10 border-2 border-black transition-all"
+        >
+          VIEW GITHUB
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

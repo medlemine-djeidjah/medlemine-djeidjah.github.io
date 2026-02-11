@@ -1,0 +1,38 @@
+---
+import type { TimelineEntry } from '../i18n/content/experience';
+
+interface Props {
+  entry: TimelineEntry;
+  isLast: boolean;
+}
+
+const { entry, isLast } = Astro.props;
+---
+
+<div class="relative pl-9 pb-10 last:pb-0">
+  {!isLast && (
+    <div class="absolute left-[10px] top-6 bottom-0 w-px bg-gradient-to-b from-border-hover to-transparent"></div>
+  )}
+
+  <div
+    class:list={[
+      'absolute left-0 top-1.5 w-[22px] h-[22px] rounded-full border-2 flex items-center justify-center transition-colors',
+      entry.isActive
+        ? 'border-accent bg-accent/20'
+        : 'border-stone-700 bg-surface',
+    ]}
+  >
+    {entry.isActive && (
+      <div class="w-2 h-2 rounded-full bg-accent animate-pulse"></div>
+    )}
+  </div>
+
+  <div>
+    <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+      <h3 class="text-base font-semibold text-stone-100">{entry.title}</h3>
+      <span class="text-sm font-mono text-stone-600 flex-shrink-0">{entry.period}</span>
+    </div>
+    <p class="text-sm font-semibold text-accent-light mt-1">{entry.institution}</p>
+    <p class="text-sm text-stone-500 mt-2 leading-relaxed">{entry.description}</p>
+  </div>
+</div>

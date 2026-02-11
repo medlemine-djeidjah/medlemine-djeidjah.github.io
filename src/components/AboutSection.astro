@@ -1,0 +1,50 @@
+---
+import { useTranslations, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section id="about" class="py-28 md:py-36 overflow-hidden">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+      <!-- Left: Years of experience with large ghostly number -->
+      <div class="lg:col-span-5 flex flex-col items-center justify-center relative min-h-[400px]" data-animate-left>
+        <!-- Large ghostly 4+ -->
+        <div class="select-none">
+          <span class="text-[12rem] md:text-[16rem] font-display font-extrabold text-white/[0.05] leading-none tracking-tighter">4</span><span class="text-[10rem] md:text-[14rem] font-display font-extrabold text-white/[0.05] leading-none tracking-tighter">+</span>
+        </div>
+        <p class="text-sm font-mono uppercase tracking-[0.25em] text-neutral-500 text-center -mt-8">
+          {lang === 'en' ? 'YEARS OF' : 'ANNÉES D\''}
+          <br />
+          {lang === 'en' ? 'EXPERIENCE' : 'EXPÉRIENCE'}
+        </p>
+      </div>
+
+      <!-- Right: Bio -->
+      <div class="lg:col-span-7" data-animate-right>
+        <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-4 block">
+          {lang === 'en' ? 'ABOUT' : 'PROFIL'}
+        </span>
+
+        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight uppercase mb-8">
+          <span class="text-white block">THE</span>
+          <span class="text-accent block">'WHY'</span>
+          <span class="text-white block">BEHIND WHO I AM</span>
+        </h2>
+
+        <div class="space-y-5 text-sm md:text-base text-neutral-400 leading-relaxed">
+          <p>{t('about.p1')}</p>
+          <p>{lang === 'en'
+            ? "My academic path shaped me into the engineer I am today. Everybody says it, but 'why' is truly the tool I use the most. It's such an important part of me that it drives every technical decision I make. And that is also why, historically, I've been the one who tackles the unclear or difficult problems — because I 'why' my way through solving them."
+            : "Mon parcours académique m'a façonné en l'ingénieur que je suis aujourd'hui. Tout le monde le dit, mais le 'pourquoi' est vraiment l'outil que j'utilise le plus. C'est une partie si importante de moi qu'il guide chaque décision technique que je prends."
+          }</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

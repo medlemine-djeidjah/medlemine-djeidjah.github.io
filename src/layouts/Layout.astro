@@ -1,0 +1,144 @@
+---
+import type { Lang } from '../i18n/utils';
+import { getAlternatePath } from '../i18n/utils';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  lang: Lang;
+}
+
+const { title, description, lang } = Astro.props;
+const alternatePath = getAlternatePath(lang);
+const canonicalPath = lang === 'en' ? '/' : '/fr/';
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="author" content="Djeidjah Mohamed Lemine" />
+    <meta name="theme-color" content="#0c0a09" />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/profile.png" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalPath} />
+    <link rel="alternate" hreflang="en" href="/" />
+    <link rel="alternate" hreflang="fr" href="/fr/" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>{title}</title>
+  </head>
+  <body class="font-sans antialiased">
+    <slot />
+
+    <script>
+      // Directional animation observers
+      const animationMap: Record<string, string> = {
+        'data-animate': 'fade-in',
+        'data-animate-left': 'fade-in-left',
+        'data-animate-right': 'fade-in-right',
+        'data-animate-scale': 'fade-in-scale',
+      };
+
+      Object.entries(animationMap).forEach(([attr, className]) => {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add(className);
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+        );
+
+        document.querySelectorAll(`[${attr}]:not(.fade-in-stagger [${attr}])`).forEach((el) => {
+          (el as HTMLElement).style.opacity = '0';
+          observer.observe(el);
+        });
+      });
+
+      // Stagger observer
+      const staggerObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              staggerObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.08 }
+      );
+
+      document.querySelectorAll('.fade-in-stagger').forEach((el) => {
+        staggerObserver.observe(el);
+      });
+
+      // Counter animation
+      const counterObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const el = entry.target as HTMLElement;
+              const target = parseInt(el.dataset.count || '0', 10);
+              const suffix = el.dataset.suffix || '';
+              const prefix = el.dataset.prefix || '';
+              const duration = 1600;
+              const start = performance.now();
+
+              function update(now: number) {
+                const elapsed = now - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const current = Math.round(eased * target);
+                el.textContent = prefix + current + suffix;
+                if (progress < 1) requestAnimationFrame(update);
+              }
+              requestAnimationFrame(update);
+              counterObserver.unobserve(el);
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+
+      document.querySelectorAll('[data-count]').forEach((el) => {
+        counterObserver.observe(el);
+      });
+
+      // Line grow animation observer
+      const lineObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('animate-line-grow');
+              lineObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+
+      document.querySelectorAll('[data-line-grow]').forEach((el) => {
+        (el as HTMLElement).style.transform = 'scaleX(0)';
+        lineObserver.observe(el);
+      });
+    </script>
+  </body>
+</html>

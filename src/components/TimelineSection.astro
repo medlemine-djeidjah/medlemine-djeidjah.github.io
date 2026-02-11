@@ -1,0 +1,33 @@
+---
+import { useTranslations, type Lang } from '../i18n/utils';
+import { getTimeline } from '../i18n/content/experience';
+import SectionHeading from './SectionHeading.astro';
+import TimelineItem from './TimelineItem.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const timeline = getTimeline(lang);
+---
+
+<section id="timeline" class="bg-slate-50 py-20 md:py-28">
+  <div class="mx-auto max-w-6xl px-6">
+    <div data-animate>
+      <SectionHeading
+        title={t('section.timeline')}
+        subtitle={t('section.timeline.subtitle')}
+      />
+    </div>
+
+    <div class="max-w-2xl" data-animate>
+      {
+        timeline.map((entry, i) => (
+          <TimelineItem entry={entry} isLast={i === timeline.length - 1} />
+        ))
+      }
+    </div>
+  </div>
+</section>

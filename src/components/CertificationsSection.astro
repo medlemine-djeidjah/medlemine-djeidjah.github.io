@@ -1,0 +1,79 @@
+---
+import { useTranslations, type Lang } from '../i18n/utils';
+import SectionHeading from './SectionHeading.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const certifications = [
+  {
+    issuer: 'NVIDIA',
+    logo: 'nvidia',
+    title: 'Fundamentals of Deep Learning',
+    year: '2025',
+    color: 'from-green-600 to-green-500',
+  },
+  {
+    issuer: 'NVIDIA',
+    logo: 'nvidia',
+    title: 'LLM Evaluation & Customization',
+    year: '2025',
+    color: 'from-green-600 to-green-500',
+  },
+  {
+    issuer: lang === 'en' ? 'French Language' : 'Langue Francaise',
+    logo: 'lang',
+    title: 'DALF C1',
+    year: '',
+    color: 'from-blue-600 to-blue-500',
+  },
+  {
+    issuer: lang === 'en' ? 'English Language' : 'Langue Anglaise',
+    logo: 'lang',
+    title: 'TOEIC 900',
+    year: '',
+    color: 'from-blue-600 to-blue-500',
+  },
+];
+---
+
+<section id="certifications" class="py-20 md:py-28">
+  <div class="mx-auto max-w-6xl px-6">
+    <div data-animate>
+      <SectionHeading
+        title={t('section.certifications')}
+        subtitle={t('section.certifications.subtitle')}
+      />
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 fade-in-stagger">
+      {
+        certifications.map((cert) => (
+          <div
+            class="group relative border border-slate-200 rounded-xl bg-white p-5 hover:border-slate-300 hover:shadow-md hover:shadow-slate-100 transition-all duration-200 overflow-hidden"
+            data-animate
+          >
+            {/* Subtle top accent */}
+            <div class={`absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r ${cert.color} opacity-0 group-hover:opacity-100 transition-opacity`} />
+
+            <div class="flex items-start justify-between mb-3">
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                {cert.issuer}
+              </p>
+              {cert.year && (
+                <span class="text-xs text-slate-300">{cert.year}</span>
+              )}
+            </div>
+            <h3 class="text-sm font-semibold text-slate-900 group-hover:text-blue-600 transition-colors">
+              {cert.title}
+            </h3>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

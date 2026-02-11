@@ -1,0 +1,35 @@
+---
+interface Props {
+  variant?: 'default' | 'accent' | 'dots';
+}
+
+const { variant = 'default' } = Astro.props;
+---
+
+{variant === 'default' && (
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="section-line" data-line-grow></div>
+  </div>
+)}
+
+{variant === 'accent' && (
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="flex items-center gap-4">
+      <div class="flex-1 section-line" data-line-grow></div>
+      <div class="w-2 h-2 bg-accent flex-shrink-0" data-animate></div>
+      <div class="flex-1 section-line" data-line-grow style="transform-origin: right;"></div>
+    </div>
+  </div>
+)}
+
+{variant === 'dots' && (
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="flex items-center justify-center gap-3" data-animate>
+      <div class="h-px flex-1 max-w-[120px] bg-gradient-to-r from-transparent to-accent/30"></div>
+      <div class="w-1.5 h-1.5 bg-accent/40"></div>
+      <div class="w-2 h-2 bg-accent"></div>
+      <div class="w-1.5 h-1.5 bg-accent/40"></div>
+      <div class="h-px flex-1 max-w-[120px] bg-gradient-to-l from-transparent to-accent/30"></div>
+    </div>
+  </div>
+)}

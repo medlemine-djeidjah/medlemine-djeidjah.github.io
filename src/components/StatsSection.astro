@@ -1,0 +1,80 @@
+---
+import type { Lang } from '../i18n/utils';
+import SectionHeading from './SectionHeading.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const stats = [
+  {
+    label: lang === 'en' ? 'ESTIMATED' : 'ESTIMÉ',
+    title: lang === 'en' ? 'Team Productivity' : 'Productivité équipe',
+    value: 40,
+    prefix: '+',
+    suffix: '%',
+    description: lang === 'en' ? 'Internal tooling automation' : 'Automatisation outils internes',
+  },
+  {
+    label: lang === 'en' ? 'ESTIMATED' : 'ESTIMÉ',
+    title: lang === 'en' ? 'Search Time Saved' : 'Temps recherche réduit',
+    value: 70,
+    prefix: '-',
+    suffix: '%',
+    description: lang === 'en' ? 'RAG chatbot deployment' : 'Déploiement chatbot RAG',
+  },
+  {
+    label: lang === 'en' ? 'ESTIMATED' : 'ESTIMÉ',
+    title: lang === 'en' ? 'ML Accuracy' : 'Précision ML',
+    value: 95,
+    prefix: '+',
+    suffix: '%',
+    description: lang === 'en' ? 'Computer vision system' : 'Système de vision par ordinateur',
+  },
+  {
+    label: lang === 'en' ? 'ESTIMATED' : 'ESTIMÉ',
+    title: lang === 'en' ? 'Active Users' : 'Utilisateurs actifs',
+    value: 1000,
+    prefix: '',
+    suffix: '+',
+    description: lang === 'en' ? 'Mobile app deployment' : 'Déploiement app mobile',
+  },
+];
+---
+
+<section id="stats" class="py-28 md:py-36">
+  <div class="mx-auto max-w-6xl px-6">
+    <div data-animate>
+      <SectionHeading
+        label={lang === 'en' ? 'IMPACT' : 'IMPACT'}
+        title={lang === 'en' ? 'MEASURABLE RESULTS' : 'RÉSULTATS MESURABLES'}
+      />
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 fade-in-stagger">
+      {stats.map((stat) => (
+        <div class="group relative bg-surface-raised border border-border p-6 hover:border-accent/30 transition-all" data-animate>
+          <!-- Orange accent square -->
+          <div class="absolute top-4 right-4 w-5 h-5 bg-accent"></div>
+
+          <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-600">
+            {stat.label}
+          </span>
+          <h3 class="text-sm font-semibold text-white mt-2 mb-8">
+            {stat.title}
+          </h3>
+
+          <!-- Large stat number -->
+          <div class="text-3xl md:text-4xl font-display font-extrabold text-accent tabular-nums">
+            <span data-count={stat.value} data-suffix={stat.suffix} data-prefix={stat.prefix}>0</span>
+          </div>
+          <p class="text-xs text-neutral-600 mt-2">
+            {stat.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

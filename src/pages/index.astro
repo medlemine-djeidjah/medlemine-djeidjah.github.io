@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import HeroSection from '../components/HeroSection.astro';
+import AboutSection from '../components/AboutSection.astro';
+import StatsSection from '../components/StatsSection.astro';
+import SkillsSection from '../components/SkillsSection.astro';
+import ExperienceSection from '../components/ExperienceSection.astro';
+import ProjectsSection from '../components/ProjectsSection.astro';
+import ContactSection from '../components/ContactSection.astro';
+import Footer from '../components/Footer.astro';
+import SectionDivider from '../components/SectionDivider.astro';
+import type { Lang } from '../i18n/utils';
+
+const lang: Lang = 'en';
+---
+
+<Layout
+  title="Djeidjah Mohamed Lemine — AI Engineering Student"
+  description="AI engineering student at IMT Mines Ales, specializing in RAG architectures, intelligent agents, and LLMs. Seeking a 4-6 month internship."
+  lang={lang}
+>
+  <Nav lang={lang} />
+  <main>
+    <HeroSection lang={lang} />
+    <SectionDivider variant="accent" />
+    <AboutSection lang={lang} />
+    <SectionDivider variant="default" />
+    <StatsSection lang={lang} />
+    <SectionDivider variant="dots" />
+    <SkillsSection lang={lang} />
+    <SectionDivider variant="default" />
+    <ExperienceSection lang={lang} />
+    <SectionDivider variant="accent" />
+    <ProjectsSection lang={lang} />
+    <ContactSection lang={lang} />
+  </main>
+  <Footer lang={lang} />
+</Layout>

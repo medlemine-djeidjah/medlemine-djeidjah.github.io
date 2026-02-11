@@ -1,0 +1,28 @@
+---
+interface Props {
+  label?: string;
+  title: string;
+  subtitle?: string;
+  number?: string;
+}
+
+const { label, title, subtitle, number } = Astro.props;
+---
+
+<div class="mb-12 md:mb-16">
+  {label && (
+    <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-3 block">
+      {label}
+    </span>
+  )}
+  <h2 class="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white uppercase leading-tight">
+    {title}
+  </h2>
+  {
+    subtitle && (
+      <p class="text-base md:text-lg text-neutral-500 mt-4 max-w-2xl leading-relaxed">
+        {subtitle}
+      </p>
+    )
+  }
+</div>
