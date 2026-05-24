@@ -1,5 +1,6 @@
 ---
 import { useTranslations, type Lang } from '../i18n/utils';
+import { contact } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
@@ -7,33 +8,66 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+
+const channels = [
+  { key: t('contact.email.label'), value: contact.email, href: `mailto:${contact.email}` },
+  { key: t('contact.phone.label'), value: contact.phone, href: contact.phoneHref },
+  { key: t('contact.location.label'), value: contact.location, href: null },
+  { key: t('contact.github.label'), value: contact.githubHandle, href: contact.github },
+  { key: t('contact.linkedin.label'), value: contact.linkedinHandle, href: contact.linkedin },
+];
 ---
 
-<section id="contact" class="mt-28 md:mt-36">
-  <!-- Full-width orange CTA block -->
-  <div class="bg-accent py-16 md:py-24 px-6" data-animate>
-    <div class="mx-auto max-w-4xl text-center">
-      <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold text-black uppercase tracking-tight leading-tight">
-        {lang === 'en' ? "LET'S BUILD" : "CONSTRUISONS"}
-        <br />
-        {lang === 'en' ? 'SOMETHING GREAT' : 'QUELQUE CHOSE DE GRAND'}
-      </h2>
+<section id="contact" class="py-24 md:py-32">
+  <div class="mx-auto max-w-6xl px-5 md:px-6">
+    <div class="flex items-center gap-2.5 mb-10 font-mono text-xs sm:text-sm" data-animate>
+      <span class="text-accent font-semibold">$</span>
+      <span class="text-neutral-500">{t('section.contact.cmd')}</span>
+    </div>
 
-      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+      <!-- left: pitch -->
+      <div class="lg:col-span-6" data-animate-left>
+        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
+          {t('contact.heading')}<span class="text-accent cursor-blink"></span>
+        </h2>
+        <p class="mt-6 text-sm md:text-base text-neutral-400 leading-relaxed max-w-lg">
+          {t('contact.description')}
+        </p>
         <a
-          href="mailto:djmed3844@gmail.com"
-          class="inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-bold uppercase tracking-[0.15em] text-white bg-black hover:bg-surface-raised border-2 border-black transition-all"
+          href={`mailto:${contact.email}`}
+          class="inline-flex items-center gap-2 mt-8 px-6 py-3 font-mono text-sm font-medium bg-accent text-black rounded hover:bg-accent-light transition-colors"
         >
-          GET IN TOUCH
+          <span class="opacity-70">$</span> {t('contact.cta')} <span>→</span>
         </a>
-        <a
-          href="https://github.com/medlemine-djeidjah"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-bold uppercase tracking-[0.15em] text-black bg-transparent hover:bg-black/10 border-2 border-black transition-all"
-        >
-          VIEW GITHUB
-        </a>
+      </div>
+
+      <!-- right: channels terminal -->
+      <div class="lg:col-span-6" data-animate-right>
+        <div class="rounded-lg border border-border bg-surface-raised/60 overflow-hidden shadow-glow">
+          <div class="flex items-center gap-3 px-4 py-2.5 border-b border-border bg-surface-overlay/40">
+            <div class="term-dots">
+              <span style="background:#ff5f56"></span>
+              <span style="background:#ffbd2e"></span>
+              <span style="background:#FF6B00"></span>
+            </div>
+            <span class="font-mono text-[11px] text-neutral-600">contact --list</span>
+          </div>
+          <div class="p-5 font-mono text-xs sm:text-sm divide-y divide-border/60">
+            {channels.map((c) => (
+              <div class="flex items-center justify-between gap-4 py-3 first:pt-0 last:pb-0">
+                <span class="text-neutral-600">{c.key}</span>
+                {c.href ? (
+                  <a href={c.href} target={c.href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer" class="text-neutral-200 hover:text-accent transition-colors truncate text-right">
+                    {c.value}
+                  </a>
+                ) : (
+                  <span class="text-neutral-200 truncate text-right">{c.value}</span>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   </div>

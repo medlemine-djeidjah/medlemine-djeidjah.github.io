@@ -3,7 +3,9 @@ import type { Lang } from '../ui';
 export interface TimelineEntry {
   id: string;
   title: string;
+  degree: string;
   institution: string;
+  location: string;
   period: string;
   description: string;
   isActive: boolean;
@@ -13,24 +15,30 @@ const timeline: Record<Lang, TimelineEntry[]> = {
   en: [
     {
       id: 'imt',
-      title: 'Engineering Cycle -- AI & Software Engineering',
+      title: 'Data Science & AI',
+      degree: 'Engineering Degree',
       institution: 'IMT Mines Ales',
+      location: 'Ales, France',
       period: '2025 -- Present',
-      description: 'Specialization in Artificial Intelligence and Software Engineering at one of France\'s leading engineering schools.',
+      description: 'Dual-degree engineering program specialized in AI systems, data engineering, and software with a strong DevOps/MLOps focus.',
       isActive: true,
     },
     {
       id: 'esp',
-      title: 'Engineering Cycle -- Networks & Telecommunications',
-      institution: 'Ecole Superieure Polytechnique (ESP) Nouakchott',
+      title: 'CS, Networks & Telecom',
+      degree: 'Engineering Degree',
+      institution: 'Ecole Superieure Polytechnique (ESP)',
+      location: 'Nouakchott, Mauritania',
       period: '2023 -- 2025',
-      description: 'Core engineering curriculum with focus on networks, telecommunications, and applied computing.',
+      description: 'Core engineering curriculum across computer science, networks, telecommunications, and applied computing.',
       isActive: false,
     },
     {
       id: 'iscae',
-      title: 'Bachelor\'s in Computer Science',
-      institution: 'ISCAE -- Institut Superieur de Comptabilite et d\'Administration des Entreprises',
+      title: 'Computer Science, Networks & Telecom',
+      degree: 'BSc',
+      institution: 'ISCAE',
+      location: 'Nouakchott, Mauritania',
       period: '2020 -- 2023',
       description: 'Foundation in computer science, algorithms, data structures, and software development.',
       isActive: false,
@@ -39,24 +47,30 @@ const timeline: Record<Lang, TimelineEntry[]> = {
   fr: [
     {
       id: 'imt',
-      title: 'Cycle Ingenieur -- Intelligence Artificielle & Ingenierie Logicielle',
+      title: 'Data Science & IA',
+      degree: 'Diplome d\'Ingenieur',
       institution: 'IMT Mines Ales',
+      location: 'Ales, France',
       period: '2025 -- Present',
-      description: 'Specialisation en Intelligence Artificielle et Ingenierie Logicielle dans l\'une des ecoles d\'ingenieurs de reference en France.',
+      description: 'Cursus ingenieur double-diplome specialise en systemes d\'IA, data engineering et logiciel avec un fort accent DevOps/MLOps.',
       isActive: true,
     },
     {
       id: 'esp',
-      title: 'Cycle Ingenieur -- Reseaux & Telecommunications',
-      institution: 'Ecole Superieure Polytechnique (ESP) Nouakchott',
+      title: 'Informatique, Reseaux & Telecom',
+      degree: 'Diplome d\'Ingenieur',
+      institution: 'Ecole Superieure Polytechnique (ESP)',
+      location: 'Nouakchott, Mauritanie',
       period: '2023 -- 2025',
-      description: 'Cursus ingenieur avec specialisation en reseaux, telecommunications et informatique appliquee.',
+      description: 'Cursus ingenieur couvrant informatique, reseaux, telecommunications et informatique appliquee.',
       isActive: false,
     },
     {
       id: 'iscae',
-      title: 'Licence en Informatique',
-      institution: 'ISCAE -- Institut Superieur de Comptabilite et d\'Administration des Entreprises',
+      title: 'Informatique, Reseaux & Telecom',
+      degree: 'Licence',
+      institution: 'ISCAE',
+      location: 'Nouakchott, Mauritanie',
       period: '2020 -- 2023',
       description: 'Fondamentaux en informatique, algorithmique, structures de donnees et developpement logiciel.',
       isActive: false,

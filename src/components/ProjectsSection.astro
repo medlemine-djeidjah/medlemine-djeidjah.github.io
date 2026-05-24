@@ -13,22 +13,22 @@ const t = useTranslations(lang);
 const projects = getProjects(lang);
 ---
 
-<section id="projects" class="py-28 md:py-36">
-  <div class="mx-auto max-w-6xl px-6">
+<section id="projects" class="py-24 md:py-32">
+  <div class="mx-auto max-w-6xl px-5 md:px-6">
     <div data-animate>
       <SectionHeading
-        label={lang === 'en' ? 'WORK' : 'TRAVAUX'}
-        title={lang === 'en' ? 'PROJECTS' : 'PROJETS'}
+        cmd={t('section.projects.cmd')}
+        title={t('section.projects.title')}
         subtitle={t('section.projects.subtitle')}
       />
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-5" data-animate>
-      {
-        projects.map((project) => (
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 fade-in-stagger">
+      {projects.map((project) => (
+        <div data-animate>
           <ProjectCard project={project} />
-        ))
-      }
+        </div>
+      ))}
     </div>
   </div>
 </section>

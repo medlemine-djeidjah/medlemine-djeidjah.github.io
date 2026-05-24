@@ -1,26 +1,24 @@
 ---
 interface Props {
-  label?: string;
+  cmd: string;
   title: string;
   subtitle?: string;
-  number?: string;
 }
 
-const { label, title, subtitle, number } = Astro.props;
+const { cmd, title, subtitle } = Astro.props;
 ---
 
 <div class="mb-12 md:mb-16">
-  {label && (
-    <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-3 block">
-      {label}
-    </span>
-  )}
-  <h2 class="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white uppercase leading-tight">
-    {title}
+  <div class="flex items-center gap-2.5 mb-5 font-mono text-xs sm:text-sm">
+    <span class="text-accent font-semibold">$</span>
+    <span class="text-neutral-500">{cmd}</span>
+  </div>
+  <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white">
+    {title}<span class="text-accent">.</span>
   </h2>
   {
     subtitle && (
-      <p class="text-base md:text-lg text-neutral-500 mt-4 max-w-2xl leading-relaxed">
+      <p class="text-sm md:text-base text-neutral-500 mt-4 max-w-2xl leading-relaxed">
         {subtitle}
       </p>
     )

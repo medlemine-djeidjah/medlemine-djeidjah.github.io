@@ -7,6 +7,7 @@ import StatsSection from '../components/StatsSection.astro';
 import SkillsSection from '../components/SkillsSection.astro';
 import ExperienceSection from '../components/ExperienceSection.astro';
 import ProjectsSection from '../components/ProjectsSection.astro';
+import EducationSection from '../components/EducationSection.astro';
 import ContactSection from '../components/ContactSection.astro';
 import Footer from '../components/Footer.astro';
 import SectionDivider from '../components/SectionDivider.astro';
@@ -16,8 +17,8 @@ const lang: Lang = 'en';
 ---
 
 <Layout
-  title="Djeidjah Mohamed Lemine — AI Engineering Student"
-  description="AI engineering student at IMT Mines Ales, specializing in RAG architectures, intelligent agents, and LLMs. Seeking a 4-6 month internship."
+  title="Djeidjah Mohamed Lemine — Data, AI & Full-Stack Engineer"
+  description="Dual-degree engineering student at IMT Mines Ales specialising in AI systems, data engineering and full-stack development. Production experience shipping RAG assistants, computer-vision models and data pipelines. Seeking a 1-year alternance (Sept 2026) or final-year PFE internship."
   lang={lang}
 >
   <Nav lang={lang} />
@@ -25,7 +26,6 @@ const lang: Lang = 'en';
     <HeroSection lang={lang} />
     <SectionDivider variant="accent" />
     <AboutSection lang={lang} />
-    <SectionDivider variant="default" />
     <StatsSection lang={lang} />
     <SectionDivider variant="dots" />
     <SkillsSection lang={lang} />
@@ -33,6 +33,9 @@ const lang: Lang = 'en';
     <ExperienceSection lang={lang} />
     <SectionDivider variant="accent" />
     <ProjectsSection lang={lang} />
+    <SectionDivider variant="default" />
+    <EducationSection lang={lang} />
+    <SectionDivider variant="accent" />
     <ContactSection lang={lang} />
   </main>
   <Footer lang={lang} />
